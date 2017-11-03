@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/responsive.css')
+    link(rel='stylesheet', href='/stylesheets/common.css')
+    link(rel='stylesheet', href='/stylesheets/jquery.atwho.css')
+    link(rel='stylesheet', href='/stylesheets/style.less')
+    link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.min.css')
+    block styles
+    script(type='text/javascript', src='/vendor/jquery-2.1.0.js')
+    script(type='text/javascript', src='/vendor/bootstrap/js/bootstrap.min.js')
+    script(type='text/javascript', src='/vendor/jquery.atwho.js')
+    block scripts
+  body
+    //- 导航区域
+    div.navbar
+      div.navbar-inner
+        div.container
+          a(class='brand' href='/')
+            img(src='/images/logo.png')
+          form(id='search_form', class='navbar-search', action='/search')
+            input(type='text' id='q' name='q' class='search-query span3' value='')
+          ul.nav.pull-right
+            li
+              a(href='/') 首页
+            li
+              a(href='//my/messages')
+                span.big.messages_count
+                未读消息
+            li
+              a(href='/getstart') 新手入门
+            li 
+              a(href='/api') API 
+            li 
+              a(href='/about') 关于
+            li 
+              a(href='/signup') 注册
+            li
+             a(href='/signin') 登录
+             
+    block content
+  
