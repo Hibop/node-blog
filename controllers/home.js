@@ -1,9 +1,18 @@
 // 首页
 
+var models = require('../models/index.js');
+var Article = models.Article;
+
 // 渲染首页
 exports.showHome = function (req, res, next) {
-	res.render('blog/index', { 
-		title: '首页' 
+	Article.find(function (err, articles) {
+		if (err) {
+			next(err);
+		};
+		res.render('blog/index', { 
+			title: '首页',
+			articles: articles
+		});
 	});
 };
 
@@ -23,8 +32,14 @@ exports.showLinks = function (req, res, next) {
 
 // 后台管理首页
 exports.showAdmin = function (req, res, next) {
-	res.render('admin/index', {
-		title: 'admin'
+	Article.find(function (err, articles) {
+		if (err) {
+			next(err);
+		};
+		res.render('admin/index', { 
+			title: 'admin',
+			articles: articles
+		});
 	});
 };
 
