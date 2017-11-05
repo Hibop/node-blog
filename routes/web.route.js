@@ -1,26 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+var homeController = require('../controllers/home.js');
 // 首页
-router.get('/', function (req, res, next) {
-	res.render('blog/index', { 
-		title: 'blog' 
-	});
-});
-
+router.get('/', homeController.showHome);
 
 // 联系
-router.get('/contact', function (req, res, next) {
-	res.render('blog/index', {
-		title: '联系'
-	});
-});
+router.get('/contact', homeController.showLinks);
 
 // 关于
-router.get('/about', function (req, res, next) {
-	res.render('blog/index', {
-		title: '关于'
-	});
-});
+router.get('/about', homeController.showContact);
 
 module.exports = router 
