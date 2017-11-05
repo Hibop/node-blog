@@ -21,4 +21,11 @@ exports.showLinks = function (req, res, next) {
 	});
 };
 
+// 后台管理首页
+exports.showAdmin = function (req, res, next) {
+	res.render('admin/index', {
+		title: 'admin'
+	});
+};
+
 
