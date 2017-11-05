@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var homeController = require('../controllers/home.js');
+var adminController = require('../controllers/admin.js');
 
 // 后台管理首页
-router.get('/admin', homeController.showAdmin);
+router.get('/admin', adminController.showAdmin);
 
 module.exports = router;

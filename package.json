@@ -6,14 +6,17 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
+    "lorem-ipsum": "^1.0.4",
     "mongoose": "^4.13.0",
     "morgan": "~1.9.0",
     "nodemon": "^1.12.1",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "slug": "^0.9.1"
   }
 }
