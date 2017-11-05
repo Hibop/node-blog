@@ -1,0 +1,25 @@
+//- 前段layout
+
+extends ../layout
+
+append styles
+	link(rel='stylesheet', href='/stylesheets/fe.css')
+
+block content
+
+	block header
+		div.blog-masthead
+			div.container
+				nav.blog-nav
+					a(class='blog-nav-item active', href='/home') home
+					a(class='blog-nav-item', href='/home') home
+					a(class='blog-nav-item', href='/home') home
+					a(class='blog-nav-item', href='/home') home
+		
+	block main
+
+	block footer 
+		footer.blog-footer
+			p 一个博客系统
+			p
+				a(href='#') 回到顶部
