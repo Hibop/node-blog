@@ -11,9 +11,20 @@ block content
 		div.blog-masthead
 			div.container
 				nav.blog-nav
-					a(class='blog-nav-item active', href='/') 首页
-					a(class='blog-nav-item', href='/contact') 联系
-					a(class='blog-nav-item', href='/about') 关于
+					if pageName === '/'
+						a(class='blog-nav-item active', href='/') 首页
+					else						 					
+						a(class='blog-nav-item', href='/') 首页
+
+					if pageName === '/contact'
+						a(class='blog-nav-item active', href='/contact') 联系
+					else
+						a(class='blog-nav-item', href='/contact') 联系
+
+					if pageName === '/about'
+						a(class='blog-nav-item active', href='/about') 关于
+					else
+						a(class='blog-nav-item', href='/about') 关于
 		
 	.container
 		.row
