@@ -9,6 +9,12 @@ var webRoute = require('./routes/web.route.js');
 
 var app = express();
 
+// 添加全局中间件,首页tab切换
+app.use(function(req, res, next){
+	app.locals.pageName = req.path;
+	next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
