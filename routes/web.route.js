@@ -12,9 +12,7 @@ router.get('/contact', homeController.showLinks);
 router.get('/about', homeController.showContact);
 
 // 文章
-router.get('/articles', function (req, res, next) {
-	res.redirect('/');
-});
+router.get('/articles', homeController.showArticles);
 
 // 视图
 router.get('/articles/view', function (req, res, next) {
