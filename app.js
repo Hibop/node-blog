@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
+var truncate = require('truncate');
 
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
@@ -15,6 +16,7 @@ var app = express();
 app.use(function(req, res, next){
 	app.locals.pageName = req.path;
   app.locals.moment = moment;
+  app.locals.truncate = truncate;
 	next();
 });
 
