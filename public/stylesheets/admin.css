@@ -4,12 +4,10 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,sans-serif!important;
   color: #555;
   padding-top: 50px;
 }
-
-
 /*
  * Global add-ons
  */
