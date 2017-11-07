@@ -6,7 +6,6 @@ var Article = models.Article;
 // 渲染首页
 exports.showHome = function (req, res, next) {
 	Article.find().populate('author').populate('category').exec(function (err, articles) {
-		// return res.jsonp(articles);
 		if (err) {
 			next(err);
 		};
