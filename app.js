@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var moment = require('moment');
 
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
@@ -13,6 +14,7 @@ var app = express();
 // 添加全局中间件,首页tab切换
 app.use(function(req, res, next){
 	app.locals.pageName = req.path;
+  app.locals.moment = moment;
 	next();
 });
 
