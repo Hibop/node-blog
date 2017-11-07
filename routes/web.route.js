@@ -27,7 +27,7 @@ router.get('/articles/comment', function (req, res, next) {
 });
 
 // 点赞
-router.get('/articles/favorites', function (req, res, next) {
+router.get('/articles/favorite', function (req, res, next) {
 
 });
 
