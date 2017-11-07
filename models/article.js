@@ -12,9 +12,10 @@ var articleModel = new Schema({
 	category: {type: Schema.Types.ObjectId, ref: 'Category'},
 	author: {type: Schema.Types.ObjectId, ref: 'User'},
 	published: {type: Boolean, default: false},
-	meat: {type: Schema.Types.Mixed},
+	meta: {type: Schema.Types.Mixed},
 	comments: [Schema.Types.Mixed],
 	created: {type: Date}
 });
+
 
 mongoose.model('Article', articleModel);

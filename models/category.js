@@ -5,9 +5,10 @@ var mongoose = require('mongoose'),
 		Schema = mongoose.Schema;
 
 var categoryModel = new Schema({
-	title: {type: String, required: true},
+	name: {type: String, required: true},
 	slug: {type: String, required: true},
 	created: {type: Date}
 });
+
 
 mongoose.model('Category', categoryModel);

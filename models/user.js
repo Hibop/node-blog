@@ -11,4 +11,5 @@ var userModel = new Schema({
 	created: {type: Date}
 });
 
+
 mongoose.model('User', userModel);
