@@ -33,7 +33,7 @@ block main
 	if pageCount > 1
 		nav
 			ul.pagination
-				- var currentPage = 1
+				- var currentPage = pageNum || 1
 				//- 当前页数为1.不可往前翻页
 				if currentPage === 1
 					li.disabled
