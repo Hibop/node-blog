@@ -2,6 +2,7 @@
 
 var models = require('../models/index.js');
 var Article = models.Article;
+var Category = models.Category;
 
 // 渲染首页
 exports.showHome = function (req, res, next) {
@@ -52,4 +53,28 @@ exports.showArticles = function (req, res, next) {
 							pageCount: pageCount
 						});
 	});
+};
+
+// 渲染分类页面
+exports.showCategories = function (req, res, next) {
+	Category.findOne({name: req.params.name})
+					.exec(function (err, category) {
+						if (err) {
+							return next(err);
+						};
+						Article.find({category: category, published: true})
+									 .sort('created')
+									 .populate('author')
+									 .populate('category')
+									 .exec(function (err, articles) {
+									 		if (err) {
+									 			return next(err);
+									 		};
+									 		res.render('blog/category', { 
+												title: category.name,
+												articles: articles,
+												category:category
+											});	
+									 });
+					});
 };
