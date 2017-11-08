@@ -15,9 +15,7 @@ router.get('/about', homeController.showContact);
 router.get('/articles', homeController.showArticles);
 
 // 每篇文章视图
-router.get('/articles/view', function (req, res, next) {
-
-});
+router.get('/articles/view/:id', homeController.showArticleDetail);
 
 // 分类汇总
 
@@ -29,8 +27,6 @@ router.get('/articles/comment', function (req, res, next) {
 });
 
 // 点赞
-router.get('/articles/favorite', function (req, res, next) {
-
-});
+router.get('/articles/favorite/:id', homeController.doLike);
 
 module.exports = router 
