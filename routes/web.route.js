@@ -11,13 +11,17 @@ router.get('/contact', homeController.showLinks);
 // 关于
 router.get('/about', homeController.showContact);
 
-// 文章
+// 文章汇总
 router.get('/articles', homeController.showArticles);
 
-// 视图
+// 每篇文章视图
 router.get('/articles/view', function (req, res, next) {
 
 });
+
+// 分类汇总
+
+router.get('/articles/category/:name', homeController.showCategories);
 
 // 评论
 router.get('/articles/comment', function (req, res, next) {
