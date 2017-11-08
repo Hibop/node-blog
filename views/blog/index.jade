@@ -7,7 +7,7 @@ block main
 	each article in articles
 		div.post
 			h3.post-title
-				a(href='/articles/view' + article._id, target='_blank')
+				a(href='/articles/view/' + article.slug, target='_blank')
 					i.fa.fa-file-archive-o
 					&nbsp;	
 					=article.title
@@ -31,7 +31,7 @@ block main
 					点赞:&nbsp;
 					=article.meta.favorites || 0
 				span.post-link
-					a(href='/articles/view' + article._id, target='_blank') 查看全文
+					a(href='/articles/view/' + article.slug, target='_blank') 查看全文
 
 	if pageCount > 1
 		nav
