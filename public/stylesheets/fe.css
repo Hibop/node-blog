@@ -147,7 +147,7 @@ h6, .h6 {
 }
 
 .post-abstract {
-  text-indent: 12px;
+  text-indent: 2em;
   margin-bottom: 10px;
 }
 
@@ -161,6 +161,22 @@ h6, .h6 {
 
 .post-meta > span:first-of-type {
   margin-left: 0px;
+}
+
+.post-view .post-meta {
+  padding: 6px 0 16px 0;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.post-view .post-content {
+  text-indent: 2em;
+  text-align: justify;
+}
+
+.post-view_header {
+  text-align: center;
 }
 
 /*
