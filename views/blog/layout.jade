@@ -38,14 +38,10 @@ block content
 					.sidebar-module
 						h4 文章分类
 						ol.list-unstyled
-							li 
-								a(href='#') Node
-							li
-								a(href='#') JavaScript
-							li 
-								a(href='#') HTML5
-							li
-								a(href='#') CSS3
+							each category in categories
+								li 
+									a(href='/articles/category/' + category.name, target='_blank')= category.name
+
 					.sidebar-module
 						h4 友情链接
 						ol.list-unstyled
