@@ -40,7 +40,7 @@ block main
 						a «
 				else 
 					li
-						a «
+						a(href='/articles?page=' + 1) «
 				//- 中间情况
 				- var page_start = currentPage - 2 > 0 ? currentPage - 2 : 1;
 				- var page_end = page_start + 4 >= pageCount ? pageCount : page_start + 4;
@@ -49,8 +49,8 @@ block main
 					li
 						a ...
 				while page_start <= page_end
-					if (i === currentPage)
-						li.disabled
+					if (page_start === currentPage)
+						li.active
 							a(href='/articles?page=' + page_start)= page_start++
 					else
 						li
@@ -68,4 +68,4 @@ block main
 						a »
 				else
 					li
-						a »
+						a(href='/articles?page=' + pageCount) »
