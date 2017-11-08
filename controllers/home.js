@@ -3,7 +3,7 @@
 var models = require('../models/index.js');
 var Article = models.Article;
 var Category = models.Category;
-
+var mongoose = require('mongoose');
 // 渲染首页
 exports.showHome = function (req, res, next) {
 	res.redirect('/articles');
@@ -77,4 +77,65 @@ exports.showCategories = function (req, res, next) {
 											});	
 									 });
 					});
+};
+
+// 渲染文章详情页
+exports.showArticleDetail = function (req, res, next) {
+	// (slug/_id)容错处理
+	if (!req.params.id) {
+		return next(new Error('no post id param!'));
+	};
+
+	var conditions = {};
+	try {
+		conditions._id = mongoose.Types.ObjectId(req.params.id);
+	} catch (err) {
+		conditions.slug = req.params.id;
+	};
+
+	Article.findOne(conditions)
+				 .sort('created')
+				 .populate('author')
+				 .populate('category')
+				 .exec(function (err, article) {
+				 		if (err) {
+				 			return next(err);
+				 		};
+				 		res.render('blog/view', {
+				 			title: article.title,
+				 			article: article
+				 		});
+				 });
+};
+
+// 文章点赞
+exports.doLike = function (req, res, next) {
+	// (slug/_id)容错处理
+	if (!req.params.id) {
+		return next(new Error('no post id param!'));
+	};
+
+	var conditions = {};
+	try {
+		conditions._id = mongoose.Types.ObjectId(req.params.id);
+	} catch (err) {
+		conditions.slug = req.params.id;
+	};
+
+	Article.findOne(conditions)
+				 .sort('created')
+				 .populate('author')
+				 .populate('category')
+				 .exec(function (err, article) {
+				 		if (err) {
+				 			return next(err);
+				 		};
+				 		article.meta.favorites = article.meta.favorites ? article.meta.favorites +1 : 1;
+				 		article.save(function (err) {
+				 			if (err) { return next(err)};
+				 			// TODO ajax点赞
+				 			res.redirect('/articles/view/' + article.slug);
+				 		});
+				 		
+				 });
 };

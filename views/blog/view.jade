@@ -1,0 +1,34 @@
+//- 博客首页
+
+extend ./layout
+block main
+	h2.page-header.post-view_header
+		= article.title
+
+	div.post.post-view
+		div.post-meta
+			span.post-created
+				i.fa.fa-calendar
+				&nbsp;
+				= moment(article.created).format('YYYY-MM-DD HH:mm')
+			span.post-author
+				i.fa.fa-user 
+				&nbsp;
+				= article.author.name
+			span.post-category
+				i.fa.fa-shopping-basket
+				&nbsp;
+				a(href='/articles/category/' + article.category.name, target='_blank')
+					= article.category.name
+			span.post-comment
+				i.fa.fa-comment
+				&nbsp;
+				= article.comments.length || 0
+			span.post-favorite
+				a(href='/articles/favorite/' + article._id)
+					i.fa.fa-star
+					&nbsp;
+					= article.meta.favorites || 0
+		div.post-content
+			= article.content
+		
