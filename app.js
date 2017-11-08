@@ -10,6 +10,9 @@ var truncate = require('truncate');
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
 
+var models = require('./models/index.js');
+var Category = models.Category;
+
 var app = express();
 
 // 添加全局中间件,首页tab切换
@@ -17,7 +20,13 @@ app.use(function(req, res, next){
 	app.locals.pageName = req.path;
   app.locals.moment = moment;
   app.locals.truncate = truncate;
-	next();
+  Category.find(function (err, categories) {
+    if (err) {
+      return next(err);
+    }
+    app.locals.categories = categories
+    next();
+  });
 });
 
 // view engine setup
