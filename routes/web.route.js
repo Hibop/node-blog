@@ -22,9 +22,7 @@ router.get('/articles/view/:id', homeController.showArticleDetail);
 router.get('/articles/category/:name', homeController.showCategories);
 
 // 评论
-router.get('/articles/comment', function (req, res, next) {
-
-});
+router.post('/articles/comment/:id', homeController.addComment);
 
 // 点赞
 router.get('/articles/favorite/:id', homeController.doLike);

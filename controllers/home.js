@@ -139,3 +139,39 @@ exports.doLike = function (req, res, next) {
 				 		
 				 });
 };
+
+// 添加评论
+exports.addComment = function (req, res, next) {
+	// (slug/_id)容错处理
+	if (!req.body.email) {
+		return next(new Error('no email param!'));
+	};
+
+	if (!req.body.content) {
+		return next(new Error('no content param!'));
+	};
+
+	var conditions = {};
+	try {
+		conditions._id = mongoose.Types.ObjectId(req.params.id);
+	} catch (err) {
+		conditions.slug = req.params.id;
+	};
+
+	Article.findOne(conditions)
+				 .exec(function (err, article) {
+				 		if (err) {
+				 			return next(err);
+				 		};
+				 		var comment = {
+				 			email: req.body.email,
+				 			content: req.body.content,
+				 			created: new Date()
+				 		};
+				 		article.comments.unshift(comment);
+				 		article.save(function (err, article) {
+				 			req.flash('info', '评论添加成功!');
+				 			res.redirect('/articles/view/' + article.slug);
+				 		});
+				 });
+};
