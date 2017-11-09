@@ -178,7 +178,17 @@ h6, .h6 {
 .post-view_header {
   text-align: center;
 }
-
+.post-comment-email {
+  color: #666;
+}
+.post-comment-item {
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+}
+.createdTime {
+  font-size: 14px;
+  color: #08c;
+}
 /*
  * Footer
  */
