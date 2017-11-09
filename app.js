@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var truncate = require('truncate');
+var session = require('express-session');
+var flash = require('connect-flash');
+var messages = require('express-messages');
 
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
@@ -39,6 +42,21 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  secret: 'blog',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: false}
+}));
+
+app.use(flash());
+
+app.use(function (req, res, next) {
+  res.locals.messages = messages(req, res);
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', webRoute);
