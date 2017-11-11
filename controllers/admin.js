@@ -2,6 +2,7 @@
 
 var models = require('../models/index.js');
 var Article = models.Article;
+var User = models.User;
 
 // 后台管理首页
 exports.showAdmin = function (req, res, next) {
@@ -30,7 +31,18 @@ exports.showAdminArticles = function (req, res, next) {
 	var sortOption = {};
 	sortOption[sortby] = sortdir;
 
-	Article.find({published: true})
+  // 查询条件
+  var queryOption = {};
+  if (req.query.category) {
+  	queryOption.category = req.query.category.trim();
+  };
+  if (req.query.author) {
+  	queryOption.author = req.query.author.trim();
+  };
+
+	User.find({}, function (err, authors) {
+		if (err) {next(err)};
+		Article.find(queryOption)
 					.sort(sortOption)
 					.populate('author')
 					.populate('category')
@@ -57,9 +69,17 @@ exports.showAdminArticles = function (req, res, next) {
 							pageNum: pageNum,
 							pageCount: pageCount,
 							sortdir: sortdir,
-							sortby: sortby
+							sortby: sortby,
+							authors: authors,
+							pretty: true,
+							filter: {
+								category: req.query.category || '',
+								author: req.query.author || ''
+							}
 						});
+		});
 	});
+	
 };
 
 // 后台文章删除

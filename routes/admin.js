@@ -24,9 +24,7 @@ router.post('/articles/edit/:id', function (req, res, next) {
 router.get('/articles/delete/:id', adminController.deleteArticle);
 
 // 后台文章列表添加
-router.get('/articles/add', function (req, res, next) {
-
-});
+router.get('/articles/add', adminController.addAdminArticle);
 
 router.post('/articles/add', function (req, res, next) {
 
