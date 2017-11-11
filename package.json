@@ -12,6 +12,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "decode-uri-component": "^0.2.0",
     "express": "~4.15.5",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
@@ -21,6 +22,7 @@
     "mongoose": "^4.13.0",
     "morgan": "~1.9.0",
     "nodemon": "^1.12.1",
+    "object-assign": "^4.1.1",
     "serve-favicon": "~2.4.5",
     "slug": "^0.9.1",
     "truncate": "^2.0.0"
