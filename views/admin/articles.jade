@@ -1,0 +1,73 @@
+//- 博客首页
+
+extend ./layout
+block main
+	h2.page-header 文章列表
+	table.table.table-bordered
+		thead
+			tr
+				th(width='30%') 标题
+				th 分类
+				th 作者
+				th 添加时间
+				th 被赞
+				th 评论
+				th 状态
+				th 管理
+		tbody
+		each article in articles
+			tr
+				td
+					a(href='/articles/view/' + article._id, target='_blank')= article.title
+				td= article.category.name
+				td= article.author.email
+				td= moment(article.crated).format('YYYY-MM-DD HH:mm:ss')
+				td= article.meta.favorites || 0
+				td= article.comments.length || 0
+				td= article.published ? '已发布' : '待发布'
+				td 
+					a(href='/articles/view/' + article._id, target='_blank', class='btn btn-sm btn-success') 查看
+					&nbsp;&nbsp;
+					a(href='/admin/articles/edit/' + article._id, target='_blank',class='btn btn-sm btn-info') 编辑
+					&nbsp;&nbsp;
+					a(href='/admin/articles/delete/' + article._id,class='btn btn-sm btn-danger') 删除
+
+	if pageCount > 1
+		nav
+			ul.pagination
+				- var currentPage = pageNum || 1
+				//- 当前页数为1.不可往前翻页
+				if currentPage === 1
+					li.disabled
+						a «
+				else 
+					li
+						a(href='/admin/articles?page=' + 1) «
+				//- 中间情况
+				- var page_start = currentPage - 2 > 0 ? currentPage - 2 : 1;
+				- var page_end = page_start + 4 >= pageCount ? pageCount : page_start + 4;
+
+				if page_start > 1
+					li
+						a ...
+				while page_start <= page_end
+					if (page_start === currentPage)
+						li.active.disabled
+							a(href='/admin/articles?page=' + page_start)= page_start++
+					else
+						li
+							a(href='/admin/articles?page=' + page_start)= page_start++
+
+				//- 还未滚到最后 
+				if page_end < pageCount
+					li
+						a ...
+
+				//- 当前页数到了末尾.不可往后翻页
+
+				if currentPage === pageCount
+					li.disabled
+						a »
+				else
+					li
+						a(href='/admin/articles?page=' + pageCount) »
