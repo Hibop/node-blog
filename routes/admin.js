@@ -9,19 +9,38 @@ router.get('/', adminController.showAdmin);
 // 后台文章列表页
 router.get('/articles', adminController.showAdminArticles);
 
-// 编辑
+// 后台文章编辑
 router.get('/articles/edit/:id', function (req, res, next) {
 
 });
 
-// 编辑提交
+// 后台文章编辑提交
 
 router.post('/articles/edit/:id', function (req, res, next) {
 
 });
 
-// 删除
-
+// 后台文章删除
 router.get('/articles/delete/:id', adminController.deleteArticle);
+
+// 后台文章列表添加
+router.get('/articles/add', function (req, res, next) {
+
+});
+
+router.post('/articles/add', function (req, res, next) {
+
+});
+
+// 后台文章分类
+router.get('/categories', adminController.showAdminCategories);
+
+// 后台文章分类添加
+router.get('/categories/add', adminController.addAdminCategory);
+
+router.post('/categories/add', function (req, res, next) {
+	//
+});
+
 
 module.exports = router;

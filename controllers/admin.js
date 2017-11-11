@@ -10,8 +10,28 @@ exports.showAdmin = function (req, res, next) {
 
 // 后台管理列表页面
 exports.showAdminArticles = function (req, res, next) {
+	// 排序字段
+	var sortby = req.query.sortby || 'created';
+	// 排序顺序
+	var sortdir = req.query.sortdir || 'desc'
+
+	// 容错
+	// sort field list
+	var sortFieldList = ['title', 'category', 'author', 'created', 'published'];
+	var sortDirList = ['desc', 'asc'];
+	if (sortFieldList.indexOf(sortby) === -1) {
+		sortby = 'created';
+	};
+	if (sortDirList.indexOf(sortdir) === -1) {
+		sortdir = 'desc'
+	};
+
+	// 排序对象
+	var sortOption = {};
+	sortOption[sortby] = sortdir;
+
 	Article.find({published: true})
-					.sort('created')
+					.sort(sortOption)
 					.populate('author')
 					.populate('category')
 					.exec(function (err, articles) {
@@ -35,7 +55,9 @@ exports.showAdminArticles = function (req, res, next) {
 							title: '后台文章列表页',
 							articles: articles.slice((pageNum - 1) * pageSize, pageNum * pageSize),
 							pageNum: pageNum,
-							pageCount: pageCount
+							pageCount: pageCount,
+							sortdir: sortdir,
+							sortby: sortby
 						});
 	});
 };
@@ -56,4 +78,25 @@ exports.deleteArticle = function (req, res, next) {
 		}
 		res.redirect('/admin/articles')
 	});
-}
+};
+
+// 后台文章添加
+exports.addAdminArticle = function (req, res, next) {
+	res.render('admin/addArticles', {
+		pretty: true
+	});
+};
+
+// 后台文章分类
+exports.showAdminCategories = function (req, res, next) {
+	res.render('admin/categories', {
+		pretty: true
+	});
+};
+
+// 后台分类添加
+exports.addAdminCategory = function (req, res, next) {
+	res.render('admin/addCategories', {
+		pretty: true
+	});
+};
