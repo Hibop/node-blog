@@ -25,9 +25,10 @@
 			var key = parts.shift();
 			var val = parts.length > 0 ? parts.join('=') : undefined;
 			key = decodeURIComponent(key);
-
+			// console.log(key)
 			val = val === undefined ? null : decodeURIComponent(val);
-			if (!ret.hasOwnProperty(key)) {
+			// if (!ret.hasOwnProperty(key)) {
+			if (!(key in ret)) {
 				ret[key] = val;
 			} else if (Array.isArray(ret[key])) {
 				ret[key].push(val);

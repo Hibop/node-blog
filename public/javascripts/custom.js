@@ -7,7 +7,6 @@ $(document).ready(function(){
   	var category = selectCategory.val();
   	var author = selectAuthor.val();
   	var query =  queryString.parse(location.search);
-  	console.log(query)
 
   	if (category) {
   		query.category = category;
@@ -20,7 +19,23 @@ $(document).ready(function(){
   	} else {
   		delete query.author;
   	}
+  	console.log(queryString.stringify(query))
   	window.location.url = window.location.origin + window.location.pathname + queryString.stringify(query);
+
+  });
+  // 列表筛选重置
+  $('#js-filter-reset').on('click', function () {
+  	selectCategory.val('');
+  	selectAuthor.val('');
+  	console.log(location.search)
+  	var query =  queryString.parse(location.search);
+
+  	delete query.category;
+
+  	delete query.author
   	
+  	// console.log(queryString.stringify(query))
+  	// window.location.url = window.location.origin + window.location.pathname;
+
   });
 });
