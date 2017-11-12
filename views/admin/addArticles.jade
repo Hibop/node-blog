@@ -3,3 +3,20 @@
 extend ./layout
 block main
 	h2.page-header 添加文章
+	form.vertical-form(method='post', action='/admin/articles/add')
+		div.form-group
+			label(for='title') 标题
+			input.form-control.input-lg(name='title', placeholder='请输入文章标题...')
+
+		dvi.form-group
+			label(for='category') 分类
+			select.form-control.input-lg(name='category')
+				option(value='', selected=true) - 选择分类 -
+				each category in categories
+					option(value=category._id)= category.name
+
+		div.form-group
+			label(for='content') 内容
+			textarea#js-post-content.form-control(name='content')
+
+		button.btn.btn-info(type='submit') 发布

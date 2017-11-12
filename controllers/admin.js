@@ -107,6 +107,11 @@ exports.addAdminArticle = function (req, res, next) {
 	});
 };
 
+// 后台文章编辑添加
+exports.postAddAdminArticle = function (req, res, next) {
+	return res.jsonp(req.body)
+}
+
 // 后台文章分类
 exports.showAdminCategories = function (req, res, next) {
 	res.render('admin/categories', {
