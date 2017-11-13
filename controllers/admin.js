@@ -4,6 +4,7 @@ var models = require('../models/index.js');
 var Article = models.Article;
 var User = models.User;
 var slug = require('slug');
+var pinyin = require('pinyin');
 
 // 后台管理首页
 exports.showAdmin = function (req, res, next) {
@@ -110,6 +111,21 @@ exports.addAdminArticle = function (req, res, next) {
 
 // 后台文章编辑添加
 exports.postAddAdminArticle = function (req, res, next) {
+
+	req.checkBody('title', '文章标题不能为空。').notEmpty();
+	req.checkBody('category', '请选择文章分类。').notEmpty();
+	req.checkBody('content', '文章内容不能为空。').notEmpty();
+
+	var errors = req.validationErrors();
+
+	if (errors) {
+		return res.render('admin/addArticles', {
+			errors: errors,
+			title: req.body.title,
+			content: req.body.content
+		});
+	}
+
 	var title = req.body.title.trim();
 	var category = req.body.category.trim();
 	var content = req.body.content.trim();
@@ -119,9 +135,17 @@ exports.postAddAdminArticle = function (req, res, next) {
 			return next(err);
 		};
 
+		// fix中文标题
+		var py = pinyin(title, {
+			style: pinyin.STYLE_NORAML,
+			heteronym: false
+		}).map(function (item) {
+			return item[0];
+		}).join(' ');
+
 		var article = new Article({
 			title: title,
-			slug: slug(title),
+			slug: slug(py),
 			category: category,
 			content: content,
 			author: author,

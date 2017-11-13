@@ -26,7 +26,7 @@ exports.showLinks = function (req, res, next) {
 // 渲染文章页
 exports.showArticles = function (req, res, next) {
 	Article.find({published: true})
-					.sort('created')
+					.sort('-created')
 					.populate('author')
 					.populate('category')
 					.exec(function (err, articles) {
