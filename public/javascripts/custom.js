@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  console.log('load custom.js');
   var selectCategory = $('#js-category');
   var selectAuthor = $('#js-author');
   // 列表筛选事件
@@ -38,4 +39,5 @@ $(document).ready(function(){
   	// window.location.url = window.location.origin + window.location.pathname;
 
   });
+
 });
