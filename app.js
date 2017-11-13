@@ -9,7 +9,7 @@ var truncate = require('truncate');
 var session = require('express-session');
 var flash = require('connect-flash');
 var messages = require('express-messages');
-
+var validator = require('express-validator');
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
 
@@ -41,6 +41,24 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(validator({
+  errorFormatter: function (param, msg, value) {
+    var namespace = param.split('.');
+    var root = namespace.shift();
+    var formParam = root;
+    while (namespace.length) {
+      formParam += '[' + namespace.shift() + ']'
+    };
+
+    return {
+      param: formParam,
+      msg: msg,
+      value: value
+    }
+  }
+}));
+
 app.use(cookieParser());
 
 app.use(session({
