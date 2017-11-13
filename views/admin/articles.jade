@@ -94,7 +94,7 @@ block main
 		each article in articles
 			tr
 				td
-					a(href='/articles/view/' + article._id, target='_blank')= article.title
+					a(href='/articles/view/' + article._id, target='_blank', title=article.slug)= article.title
 				td= article.category.name
 				td= article.author.email
 				td= moment(article.crated).format('YYYY-MM-DD HH:mm:ss')
