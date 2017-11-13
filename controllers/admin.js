@@ -3,6 +3,7 @@
 var models = require('../models/index.js');
 var Article = models.Article;
 var User = models.User;
+var slug = require('slug');
 
 // 后台管理首页
 exports.showAdmin = function (req, res, next) {
@@ -109,7 +110,39 @@ exports.addAdminArticle = function (req, res, next) {
 
 // 后台文章编辑添加
 exports.postAddAdminArticle = function (req, res, next) {
-	return res.jsonp(req.body)
+	var title = req.body.title.trim();
+	var category = req.body.category.trim();
+	var content = req.body.content.trim();
+
+	User.findOne({}, function (err, author) {
+		if (err) {
+			return next(err);
+		};
+
+		var article = new Article({
+			title: title,
+			slug: slug(title),
+			category: category,
+			content: content,
+			author: author,
+			published: true,
+			meta: {favorites: 0},
+			comments: [],
+			created: new Date()
+
+		});
+
+		article.save(function (err, article) {
+			if (err) {
+				req.flash('error', '文章保存失败!');
+				res.redirect('/admin/articles/add');
+			};
+			req.flash('info', '文章保存成功!');
+			res.redirect('/admin/articles');
+		})
+
+	});
+	
 }
 
 // 后台文章分类

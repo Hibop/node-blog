@@ -20,3 +20,8 @@ block main
 			textarea#js-post-content.form-control(name='content')
 
 		button.btn.btn-info(type='submit') 发布
+
+block append scripts
+	script(type='text/javascript', src='/vendor/ckeditor/ckeditor.js')
+	script
+		$(document).ready(function(){CKEDITOR.replace('js-post-content');})	
