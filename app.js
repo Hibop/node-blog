@@ -23,7 +23,7 @@ app.use(function(req, res, next){
 	app.locals.pageName = req.path;
   app.locals.moment = moment;
   app.locals.truncate = truncate;
-  Category.find(function (err, categories) {
+  Category.find({}).sort('-created').exec(function (err, categories) {
     if (err) {
       return next(err);
     }

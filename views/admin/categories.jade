@@ -3,3 +3,62 @@
 extend ./layout
 block main
 	h2.page-header 分类列表
+	table.table.table-bordered
+		thead
+			tr
+				th(width='30%') 名称
+				th 别名
+				th 创建时间
+				th 管理
+		tbody
+		each category in categories
+			tr
+				td= category.name
+				td= category.slug
+				td= moment(category.crated).format('YYYY-MM-DD HH:mm:ss')
+				td 
+					a(href='/articles/category/' + category.name, target='_blank', class='btn btn-sm btn-success') 查看
+					&nbsp;&nbsp;
+					a(href='/admin/category/edit/' + category._id, target='_blank',class='btn btn-sm btn-info') 编辑
+					&nbsp;&nbsp;
+					a(href='/admin/category/delete/' + category._id,class='btn btn-sm btn-danger') 删除
+
+	//- if pageCount > 1
+	//- 	nav
+	//- 		ul.pagination
+	//- 			- var currentPage = pageNum || 1
+	//- 			//- 当前页数为1.不可往前翻页
+	//- 			if currentPage === 1
+	//- 				li.disabled
+	//- 					a «
+	//- 			else 
+	//- 				li
+	//- 					a(href='/admin/articles?page=' + 1 + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir) «
+	//- 			//- 中间情况
+	//- 			- var page_start = currentPage - 2 > 0 ? currentPage - 2 : 1;
+	//- 			- var page_end = page_start + 4 >= pageCount ? pageCount : page_start + 4;
+
+	//- 			if page_start > 1
+	//- 				li
+	//- 					a ...
+	//- 			while page_start <= page_end
+	//- 				if (page_start === currentPage)
+	//- 					li.active.disabled
+	//- 						a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir)= page_start++
+	//- 				else
+	//- 					li
+	//- 						a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir)= page_start++
+
+	//- 			//- 还未滚到最后 
+	//- 			if page_end < pageCount
+	//- 				li
+	//- 					a ...
+
+	//- 			//- 当前页数到了末尾.不可往后翻页
+
+	//- 			if currentPage === pageCount
+	//- 				li.disabled
+	//- 					a »
+	//- 			else
+	//- 				li
+	//- 					a(href='/admin/articles?page=' + pageCount + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir) »

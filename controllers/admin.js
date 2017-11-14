@@ -3,6 +3,7 @@
 var models = require('../models/index.js');
 var Article = models.Article;
 var User = models.User;
+var Category = models.Category;
 var slug = require('slug');
 var pinyin = require('pinyin');
 
@@ -177,25 +178,87 @@ exports.postAddAdminArticle = function (req, res, next) {
 	
 }
 
-// 后台文章分类
+// 后台文章分类列表
 exports.showAdminCategories = function (req, res, next) {
 	res.render('admin/categories', {
 		pretty: true
 	});
 };
 
-// 后台分类添加
+// 后台分类添加查看
 exports.addAdminCategory = function (req, res, next) {
 	res.render('admin/addCategories', {
+		action: '/admin/categories/add',
+		category: {
+			_id: '',
+			name: ''
+		},
 		pretty: true
 	});
+};
+
+// 后台分类添加提交
+exports.editAdminCategory = function (req, res, next) {
+	//
+	req.checkBody('name', '分类名字不能为空。').notEmpty();
+
+	var errors = req.validationErrors();
+
+	if (errors) {
+		return res.render('admin/addCategories', {
+			errors: errors,
+			name: req.body.name
+		});
+	}
+
+	var name = req.body.name.trim();
+
+	// fix中文标题
+	var py = pinyin(name, {
+		style: pinyin.STYLE_NORAML,
+		heteronym: false
+	}).map(function (item) {
+		return item[0];
+	}).join(' ');
+
+	var category = new Category({
+		name: name,
+		slug: slug(py),
+		created: new Date()
+
+	});
+
+	category.save(function (err, category) {
+		if (err) {
+			req.flash('error', '分类添加失败!');
+			res.redirect('/admin/categories/add');
+		};
+		req.flash('info', '分类添加成功!');
+		res.redirect('/admin/categories');
+	});
+
+};
+
+// 后台分类删除
+exports.deleteAdminCategory = function (req, res, next) {
+
+};
+
+// 后台分类编辑查看
+exports.viewAdminCategory = function (req, res, next) {
+
+};
+
+// 后台分裂编辑提交
+exports.postAdminCategory = function (req, res, next) {
+
 };
 
 // 后台文章编辑提交
 exports.editAdminArticle = function (req, res, next) {
 	
   var article = req.article;
- 
+
 	var title = req.body.title.trim();
 	var category = req.body.category.trim();
 	var content = req.body.content.trim();
