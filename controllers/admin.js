@@ -6,6 +6,7 @@ var User = models.User;
 var slug = require('slug');
 var pinyin = require('pinyin');
 
+
 // 后台管理首页
 exports.showAdmin = function (req, res, next) {
 	res.redirect('/admin/articles');
@@ -105,7 +106,14 @@ exports.deleteArticle = function (req, res, next) {
 // 后台文章添加
 exports.addAdminArticle = function (req, res, next) {
 	res.render('admin/addArticles', {
-		pretty: true
+		pretty: true,
+		action: '/admin/articles/add',
+		article: {
+			category: {
+				_id: ''
+			},
+			content: ''
+		}
 	});
 };
 
@@ -158,10 +166,10 @@ exports.postAddAdminArticle = function (req, res, next) {
 
 		article.save(function (err, article) {
 			if (err) {
-				req.flash('error', '文章保存失败!');
+				req.flash('error', '文章发布失败!');
 				res.redirect('/admin/articles/add');
 			};
-			req.flash('info', '文章保存成功!');
+			req.flash('info', '文章发布成功!');
 			res.redirect('/admin/articles');
 		})
 
@@ -182,3 +190,48 @@ exports.addAdminCategory = function (req, res, next) {
 		pretty: true
 	});
 };
+
+// 后台文章编辑提交
+exports.editAdminArticle = function (req, res, next) {
+	
+  var article = req.article;
+ 
+	var title = req.body.title.trim();
+	var category = req.body.category.trim();
+	var content = req.body.content.trim();
+
+	// fix中文标题
+	var py = pinyin(title, {
+		style: pinyin.STYLE_NORAML,
+		heteronym: false
+	}).map(function (item) {
+		return item[0];
+	}).join(' ');
+
+	// 存值
+	article.title = title;
+	article.category = category;
+	article.content = content;
+	article.slug = slug(py);
+
+	article.save(function (err, article) {
+		if (err) {
+			req.flash('error', '文章保存失败!');
+			res.redirect('/admin/articles/edit/' + article._id);
+		};
+		req.flash('info', '文章保存成功!');
+		res.redirect('/admin/articles');
+	})
+}
+
+// 后台文章编辑查看
+exports.viewAdminArticle = function (req, res, next) {
+
+		var article = req.article  		 	
+		res.render('admin/addArticles', {
+			title: article.title,
+			article: article,
+			action: '/admin/articles/edit/' + req.article._id
+		});
+		
+}

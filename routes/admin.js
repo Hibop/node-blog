@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var adminController = require('../controllers/admin.js');
 
+var editGetPost = require('../middlewares/editGetPost.js');
+
 // 后台管理首页
 router.get('/', adminController.showAdmin);
 
@@ -9,16 +11,12 @@ router.get('/', adminController.showAdmin);
 // 后台文章列表页
 router.get('/articles', adminController.showAdminArticles);
 
-// 后台文章编辑
-router.get('/articles/edit/:id', function (req, res, next) {
-
-});
+// 后台文章编辑查看
+router.get('/articles/edit/:id', editGetPost.getPost, adminController.viewAdminArticle);
 
 // 后台文章编辑提交
 
-router.post('/articles/edit/:id', function (req, res, next) {
-
-});
+router.post('/articles/edit/:id', editGetPost.getPost, adminController.editAdminArticle);
 
 // 后台文章删除
 router.get('/articles/delete/:id', adminController.deleteArticle);
