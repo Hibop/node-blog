@@ -242,16 +242,54 @@ exports.editAdminCategory = function (req, res, next) {
 // 后台分类删除
 exports.deleteAdminCategory = function (req, res, next) {
 
+	req.category.remove(function (err, rowsRemoved) {
+		if (err) {
+			return next(err)
+		};
+		if (rowsRemoved) {
+			req.flash('success', '分类删除成功!');
+		} else {
+			req.flash('success', '分类删除失败!');
+		}
+		res.redirect('/admin/categories')
+	});
 };
 
 // 后台分类编辑查看
 exports.viewAdminCategory = function (req, res, next) {
+	res.render('admin/addCategories', {
+		action: '/admin/categories/edit/' + req.category._id,
+		category: req.category,
+		pretty: true
+	});
 
 };
 
-// 后台分裂编辑提交
+// 后台分类编辑提交
 exports.postAdminCategory = function (req, res, next) {
+	var category = req.category;
 
+	var name = req.body.name.trim();
+	// fix中文标题
+	var py = pinyin(name, {
+		style: pinyin.STYLE_NORAML,
+		heteronym: false
+	}).map(function (item) {
+		return item[0];
+	}).join(' ');
+
+	// 存值
+	category.name = name;
+	category.slug = slug(py);
+
+	category.save(function (err, category) {
+		if (err) {
+			req.flash('error', '分类名保存失败!');
+			res.redirect('/admin/categories/edit/' + article._id);
+		};
+		req.flash('info', '分类名保存成功!');
+		res.redirect('/admin/categories');
+	})
 };
 
 // 后台文章编辑提交

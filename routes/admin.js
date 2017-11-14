@@ -37,7 +37,7 @@ router.get('/categories/add', adminController.addAdminCategory);
 router.post('/categories/add',  adminController.editAdminCategory);
 
 // 后台分类删除
-router.get('/categories/delete/:id', adminController.deleteAdminCategory);
+router.get('/categories/delete/:id', editGetCategory.getCategory, adminController.deleteAdminCategory);
 
 // 后台分类编辑查看
 router.get('/categories/edit/:id', editGetCategory.getCategory, adminController.viewAdminCategory);
