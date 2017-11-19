@@ -132,12 +132,17 @@ exports.postAddAdminArticle = function (req, res, next) {
 	req.checkBody('content', '文章内容不能为空。').notEmpty();
 
 	var errors = req.validationErrors();
-
+	// console.log(errors)
 	if (errors) {
 		return res.render('admin/addArticles', {
 			errors: errors,
 			title: req.body.title,
-			content: req.body.content
+			content: req.body.content,
+			article: {
+				category: {
+					_id: ''
+				}
+			}
 		});
 	}
 
@@ -213,7 +218,10 @@ exports.editAdminCategory = function (req, res, next) {
 	if (errors) {
 		return res.render('admin/addCategories', {
 			errors: errors,
-			name: req.body.name
+			name: req.body.name,
+			category: {
+				name: ''
+			}
 		});
 	}
 
