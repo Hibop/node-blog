@@ -11,14 +11,14 @@ exports.showHome = function (req, res, next) {
 
 // 渲染关于
 exports.showContact = function (req, res, next) {
-	res.render('blog/index', {
+	res.render('blog/about', {
 		title: '关于'
 	});
 };
 
 // 渲染联系
 exports.showLinks = function (req, res, next) {
-	res.render('blog/index', {
+	res.render('blog/contact', {
 		title: '联系'
 	});
 };

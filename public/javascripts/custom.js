@@ -39,6 +39,7 @@ $(document).ready(function(){
   $('#js-filter-reset').on('click', function () {
   	selectCategory.val('');
   	selectAuthor.val('');
+    selectKeyword.val('');
   	console.log(location.search)
   	var query =  queryString.parse(location.search);
 
