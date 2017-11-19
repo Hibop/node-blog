@@ -2,11 +2,14 @@ $(document).ready(function(){
   console.log('load custom.js');
   var selectCategory = $('#js-category');
   var selectAuthor = $('#js-author');
+  var selectKeyword = $('#js-keyword');
   // 列表筛选事件
   $('#js-filter-submit').on('click', function () {
   	
   	var category = selectCategory.val();
   	var author = selectAuthor.val();
+    var keyword = selectKeyword.val();
+
   	var query =  queryString.parse(location.search);
 
   	if (category) {
@@ -20,6 +23,14 @@ $(document).ready(function(){
   	} else {
   		delete query.author;
   	}
+
+    if (keyword) {
+      query.keyword = keyword;
+    } else {
+      delete query.keyword;
+    }
+
+
   	console.log(queryString.stringify(query))
   	window.location.url = window.location.origin + window.location.pathname + queryString.stringify(query);
 
@@ -34,6 +45,8 @@ $(document).ready(function(){
   	delete query.category;
 
   	delete query.author
+
+    delete query.keyword
   	
   	// console.log(queryString.stringify(query))
   	// window.location.url = window.location.origin + window.location.pathname;

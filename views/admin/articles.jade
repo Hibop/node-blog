@@ -4,20 +4,24 @@ extend ./layout
 block main
 	h2.page-header 文章列表
 	form#form-post-filter.form.form-inline.form-filter
-		div.form-group
+		div.form-group.has-success
 			label 分类
 			select#js-category.form-control(name='category')
 				option(value='', selected=(filter.category === '')) - 选择分类 -
 				each category in categories
 					option(value=category._id, selected=(category._id.toString() === filter.category))= category.name
-		div.form-group
+		div.form-group.has-success
 			label 作者
 			select#js-author.form-control(name='author')
 				option(value='', selected=(filter.author === '')) - 选择作者 -
 				each author in authors
 					option(value=author._id, selected=(author._id.toString() === filter.author))= author.name
-		button#js-filter-submit.btn.btn-info 筛选
-		button#js-filter-reset.btn.btn-info 重置
+
+		div.form-group.has-success
+			label 关键字
+			input#js-keyword.form-control(name='keyword', type='text', value=filter.keyword)
+		button#js-filter-submit.btn.btn-success 筛选
+		button#js-filter-reset.btn.btn-success 重置
 
 	table.table.table-bordered
 		thead
@@ -102,9 +106,9 @@ block main
 				td= article.comments.length || 0
 				td= article.published ? '已发布' : '待发布'
 				td 
-					a(href='/articles/view/' + article._id, target='_blank', class='btn btn-sm btn-success') 查看
+					a(href='/articles/view/' + article._id, target='_blank', class='btn btn-sm btn-primary') 查看
 					&nbsp;&nbsp;
-					a(href='/admin/articles/edit/' + article._id, target='_blank',class='btn btn-sm btn-info') 编辑
+					a(href='/admin/articles/edit/' + article._id, target='_blank',class='btn btn-sm btn-inverse') 编辑
 					&nbsp;&nbsp;
 					a(href='/admin/articles/delete/' + article._id,class='btn btn-sm btn-danger') 删除
 

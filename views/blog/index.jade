@@ -8,8 +8,6 @@ block main
 		div.post
 			h3.post-title
 				a(href='/articles/view/' + article.slug, target='_blank')
-					i.fa.fa-file-archive-o
-					&nbsp;	
 					=article.title
 			div.post-abstract
 				=truncate(article.content, 180)
