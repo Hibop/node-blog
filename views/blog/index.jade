@@ -10,7 +10,7 @@ block main
 				a(href='/articles/view/' + article.slug, target='_blank')
 					=article.title
 			div.post-abstract
-				=truncate(article.content, 180)
+				!=truncate(article.content, 180)
 			div.post-meta
 				span.post-created
 					发布时间:&nbsp;
