@@ -25,7 +25,14 @@ exports.showLinks = function (req, res, next) {
 
 // 渲染文章页
 exports.showArticles = function (req, res, next) {
-	Article.find({published: true})
+	// 查询条件
+  var queryOption = {published: true};
+  if (req.query.keyword) {
+  	queryOption.title = new RegExp(req.query.keyword.trim(), 'i');
+  	// queryOption.content = new RegExp(req.query.keyword.trim(), 'i');
+  };
+
+	Article.find(queryOption)
 					.sort('-created')
 					.populate('author')
 					.populate('category')
@@ -50,7 +57,8 @@ exports.showArticles = function (req, res, next) {
 							title: '首页',
 							articles: articles.slice((pageNum - 1) * pageSize, pageNum * pageSize),
 							pageNum: pageNum,
-							pageCount: pageCount
+							pageCount: pageCount,
+							keyword: req.query.keyword || ''
 						});
 	});
 };
