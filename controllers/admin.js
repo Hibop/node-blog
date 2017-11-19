@@ -44,6 +44,11 @@ exports.showAdminArticles = function (req, res, next) {
   	queryOption.author = req.query.author.trim();
   };
 
+  if (req.query.keyword) {
+  	queryOption.title = new RegExp(req.query.keyword.trim(), 'i');
+  	queryOption.content = new RegExp(req.query.keyword.trim(), 'i');
+  };
+
 	User.find({}, function (err, authors) {
 		if (err) {next(err)};
 		Article.find(queryOption)
@@ -78,7 +83,8 @@ exports.showAdminArticles = function (req, res, next) {
 							pretty: true,
 							filter: {
 								category: req.query.category || '',
-								author: req.query.author || ''
+								author: req.query.author || '',
+								keyword: req.query.keyword || ''
 							}
 						});
 		});
