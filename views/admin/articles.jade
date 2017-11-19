@@ -122,7 +122,7 @@ block main
 						a «
 				else 
 					li
-						a(href='/admin/articles?page=' + 1 + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir) «
+						a(href='/admin/articles?page=' + 1 + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir + '&keyword=' + filter.keyword) «
 				//- 中间情况
 				- var page_start = currentPage - 2 > 0 ? currentPage - 2 : 1;
 				- var page_end = page_start + 4 >= pageCount ? pageCount : page_start + 4;
@@ -133,10 +133,10 @@ block main
 				while page_start <= page_end
 					if (page_start === currentPage)
 						li.active.disabled
-							a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir)= page_start++
+							a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir + '&keyword=' + filter.keyword)= page_start++
 					else
 						li
-							a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir)= page_start++
+							a(href='/admin/articles?page=' + page_start + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir + '&keyword=' + filter.keyword)= page_start++
 
 				//- 还未滚到最后 
 				if page_end < pageCount
@@ -150,4 +150,4 @@ block main
 						a »
 				else
 					li
-						a(href='/admin/articles?page=' + pageCount + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir) »
+						a(href='/admin/articles?page=' + pageCount + '&category=' + filter.category + '&author=' + filter.author + '&sortby=' + sortby + '&sortdir=' + sortdir + '&keyword=' + filter.keyword) »
