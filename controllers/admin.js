@@ -350,3 +350,38 @@ exports.viewAdminArticle = function (req, res, next) {
 		});
 		
 }
+
+// 登陆页查看
+exports.login = function (req, res, next) {
+	res.render('admin/login', {
+		pretty: true
+	});
+};
+
+// 登陆页提交
+exports.postLogin = function (req, res, next) {
+	res.render('admin/login', {
+		pretty: true
+	});
+};
+
+// 注册页查看
+exports.register = function (req, res, next) {
+	res.render('admin/register', {
+		pretty: true
+	});
+};
+
+// 注册页提交
+exports.postRegister = function (req, res, next) {
+	res.render('admin/register', {
+		pretty: true
+	});
+};
+
+// 注销
+exports.logout = function (req, res, next) {
+	res.render('admin/register', {
+		pretty: true
+	});
+};

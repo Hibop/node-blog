@@ -46,5 +46,19 @@ router.get('/categories/edit/:id', editGetCategory.getCategory, adminController.
 // 后台分类编辑提交
 router.post('/categories/edit/:id', editGetCategory.getCategory, adminController.postAdminCategory);
 
+// 登陆
+router.get('/users/login', adminController.login);
+
+// 登陆页提交
+router.post('/users/login', adminController.postLogin);
+
+// 注册 
+router.get('/users/register', adminController.register);
+
+// 注册页提交
+router.post('/users/register', adminController.postRegister);
+
+// 注销
+router.get('/users/logout', adminController.logout);
 
 module.exports = router;
