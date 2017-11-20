@@ -1,0 +1,19 @@
+extends ./layout_user
+
+block content
+	div.login-main
+		div.login
+			div.login-screen
+				div.login-icon
+					img(src="/images/icon.png", alt="Welcome to Login")
+					h4 Welcome to Login
+				div.login-form
+					div.form-group
+						input.form-control.login-field(type="text",value="" ,placeholder="Enter your name", id="login-name")
+						label.login-field-icon.fui-user(for="login-name")
+					div.form-group
+						input.form-control.login-field(type='password', value='', placeholder='PassWord', id='login-pass')
+						label.login-field-icon.fui-lock(for="login-pass")
+
+					a.btn.btn-primary.btn-lg.btn-block(href='/') Login
+					a.login-link(href='') Lost your password?

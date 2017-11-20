@@ -26,9 +26,14 @@ block content
 					else
 						a(class='blog-nav-item', href='/about') 关于
 
-				form.navbar-form.pull-right(method='get', action='/articles/')
+				form.navbar-form.pull-left(method='get', action='/articles/')
 					input.form-control.keyword(type='text', name='keyword', value=keyword || '', placeholder='标题搜索..')
-		
+				ul.nav.navbar-nav.navbar-right
+					li
+						a(href='/admin/users/login') 登陆
+					li
+						a(href='/admin/users/register') 注册			
+			
 	.container
 		.row
 			.col-sm-8.blog-main
