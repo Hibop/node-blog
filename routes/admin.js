@@ -5,6 +5,8 @@ var adminController = require('../controllers/admin.js');
 var editGetPost = require('../middlewares/editGetPost.js');
 var editGetCategory = require('../middlewares/editGetCategory.js');
 
+var passport = require('passport');
+
 // 后台管理首页
 router.get('/', adminController.showAdmin);
 
@@ -50,7 +52,7 @@ router.post('/categories/edit/:id', editGetCategory.getCategory, adminController
 router.get('/users/login', adminController.login);
 
 // 登陆页提交
-router.post('/users/login', adminController.postLogin);
+router.post('/users/login', passport.authenticate('local', { failureRedirect: '/admin/users/login' }), adminController.postLogin);
 
 // 注册 
 router.get('/users/register', adminController.register);

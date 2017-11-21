@@ -8,10 +8,14 @@ var moment = require('moment');
 var truncate = require('truncate');
 var session = require('express-session');
 var flash = require('connect-flash');
+var passport = require('passport');
 var messages = require('express-messages');
 var validator = require('express-validator');
+
+
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
+
 
 var models = require('./models/index.js');
 var Category = models.Category;
@@ -68,6 +72,8 @@ app.use(session({
   cookie: {secure: false}
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 app.use(function (req, res, next) {
@@ -97,5 +103,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+require('./config/passport.js').init();
 
 module.exports = app;
