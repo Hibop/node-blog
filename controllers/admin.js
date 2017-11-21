@@ -6,6 +6,7 @@ var User = models.User;
 var Category = models.Category;
 var slug = require('slug');
 var pinyin = require('pinyin');
+var md5 = require('md5');
 
 
 // 后台管理首页
@@ -374,9 +375,36 @@ exports.register = function (req, res, next) {
 
 // 注册页提交
 exports.postRegister = function (req, res, next) {
-	res.render('admin/register', {
-		pretty: true
+	// 空校验
+	req.checkBody('email', '邮箱不能为空').notEmpty().isEmail();
+	req.checkBody('password', '密码不能为空').notEmpty();
+	req.checkBody('confirmPassword', '两次密码不匹配').notEmpty().equals(req.body.password);
+
+	var errors = req.validationErrors();
+	// console.log(errors)
+	if (errors) {
+		return res.render('admin/register', {
+			errors: errors
+		});
+	};
+
+	var user = new User({
+		name: req.body.email.split('@').shift(),
+		email: req.body.email,
+		password: md5(req.body.password),
+		created: new Date()
 	});
+
+	user.save(function (err, user) {
+		if (err) {
+			req.flash('error', '遗憾,注册失败!');
+			res.render('admin/register');
+		} else {
+			req.flash('info', '恭喜注册成功!');
+			res.redirect('/admin/users/login');
+		};
+	});
+
 };
 
 // 注销
