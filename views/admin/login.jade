@@ -1,19 +1,19 @@
 extends ./layout_user
 
-block content
+block main
 	div.login-main
 		div.login
 			div.login-screen
 				div.login-icon
 					img(src="/images/icon.png", alt="Welcome to Login")
 					h4 Welcome to Login
-				div.login-form
+				form.login-form(method='post', action='/admin/users/login')
 					div.form-group
-						input.form-control.login-field(type="text",value="" ,placeholder="Enter your name", id="login-name")
-						label.login-field-icon.fui-user(for="login-name")
+						input.form-control.login-field(type="email",value="" ,placeholder="Enter your email", id="inputEmail", name='email')
+						label.login-field-icon.fui-user(for="inputEmail")
 					div.form-group
-						input.form-control.login-field(type='password', value='', placeholder='PassWord', id='login-pass')
-						label.login-field-icon.fui-lock(for="login-pass")
+						input.form-control.login-field(type='password', value='', placeholder='PassWord', id='inputPassword', name='password')
+						label.login-field-icon.fui-lock(for="inputPassword")
 
-					a.btn.btn-primary.btn-lg.btn-block(href='/') Login
-					a.login-link(href='') Lost your password?
+					button.btn.btn-primary.btn-lg.btn-block(type='submit') 登陆
+					a.login-link(href='/admin/users/register') 没有账号? 前往注册
