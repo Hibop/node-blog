@@ -361,9 +361,8 @@ exports.login = function (req, res, next) {
 
 // 登陆页提交
 exports.postLogin = function (req, res, next) {
-	res.render('admin/login', {
-		pretty: true
-	});
+	console.log('user login success:', req.body);
+	res.redirect('/admin');
 };
 
 // 注册页查看
