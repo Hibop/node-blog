@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var messages = require('express-messages');
 var validator = require('express-validator');
-
+var MongoStore = require('connect-mongo')(session);
 
 var webRoute = require('./routes/web.route.js');
 var admin = require('./routes/admin.js');
@@ -19,7 +19,7 @@ var admin = require('./routes/admin.js');
 
 var models = require('./models/index.js');
 var Category = models.Category;
-
+var connection = models.db;
 var app = express();
 
 // 添加全局中间件,首页tab切换
@@ -69,7 +69,8 @@ app.use(session({
   secret: 'blog',
   resave: false,
   saveUninitialized: true,
-  cookie: {secure: false}
+  cookie: {secure: false},
+  store: new MongoStore({ mongooseConnection: connection })
 }));
 
 app.use(passport.initialize());
@@ -78,6 +79,7 @@ app.use(flash());
 
 app.use(function (req, res, next) {
   res.locals.messages = messages(req, res);
+  // console.log(req.session); // test session
   next();
 });
 

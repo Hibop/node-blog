@@ -1,5 +1,7 @@
 var models = require('../models/index.js');
 var Category = models.Category;
+var Article = models.Article;
+
 
 exports.getCategory = function (req, res, next) {
 	if (!req.params.id) {
@@ -14,6 +16,33 @@ exports.getCategory = function (req, res, next) {
 					 	if (!category) {
 					 		return next(new Error('fail not found:', req.params.id))
 					 	}
+					 	// 删除分类下文章
+					 	Article.remove({category: category}, function (err, rowsRemoved) {
+					 		if (err) {
+								return next(err)
+							};
+							if (rowsRemoved) {
+								console.log('分类下文章删除成功')
+							}
+					 	})
+					 	// Article.find({category: category})
+							// 		 .sort('created')
+							// 		 .populate('author')
+							// 		 .populate('category')
+							// 		 .exec(function (err, articles) {
+							// 		 		if (err) {
+							// 		 			return next(err);
+							// 		 		};
+							// 		 		console.log(articles)
+							// 		 		articles.remove(function (err, rowsRemoved) {
+							// 		 			if (err) {
+							// 						return next(err)
+							// 					};
+							// 					if (rowsRemoved) {
+							// 						console.log('分类下文章删除成功')
+							// 					}
+							// 		 		})	
+							// 		 });
 					 	// console.log(category); 
 					 	req.category = category;
 					 	next();

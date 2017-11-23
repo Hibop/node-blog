@@ -14,3 +14,4 @@ require('./article');
 exports.User         = mongoose.model('User');
 exports.Category        = mongoose.model('Category');
 exports.Article        = mongoose.model('Article');
+exports.db = db;
