@@ -29,7 +29,7 @@ cd node-blog
 
 npm install
 
-npm start
+npm start (前提本地先跑起MongoDB,配置见config.js)
 
 ```
 
