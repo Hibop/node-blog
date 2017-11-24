@@ -19,6 +19,7 @@ var admin = require('./routes/admin.js');
 
 var models = require('./models/index.js');
 var Category = models.Category;
+var User = models.User;
 var connection = models.db;
 var app = express();
 
@@ -75,10 +76,27 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(function (req, res, next) {
+//   req.user = null;
+//   if (req.session.passport && req.session.passport.user) {
+//     User.find({_id: req.session.passport.user}, function (err, user) {
+//       if (err) { return next(err)};
+//       user.password = null;
+//       req.user = user;
+//       next();
+
+//     })
+//   }
+//   next()
+// });
+
 app.use(flash());
 
 app.use(function (req, res, next) {
   res.locals.messages = messages(req, res);
+  res.locals.user = req.user;
+  console.log(req.user)
   // console.log(req.session); // test session
   next();
 });

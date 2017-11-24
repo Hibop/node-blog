@@ -25,25 +25,7 @@ exports.getCategory = function (req, res, next) {
 								console.log('分类下文章删除成功')
 							}
 					 	})
-					 	// Article.find({category: category})
-							// 		 .sort('created')
-							// 		 .populate('author')
-							// 		 .populate('category')
-							// 		 .exec(function (err, articles) {
-							// 		 		if (err) {
-							// 		 			return next(err);
-							// 		 		};
-							// 		 		console.log(articles)
-							// 		 		articles.remove(function (err, rowsRemoved) {
-							// 		 			if (err) {
-							// 						return next(err)
-							// 					};
-							// 					if (rowsRemoved) {
-							// 						console.log('分类下文章删除成功')
-							// 					}
-							// 		 		})	
-							// 		 });
-					 	// console.log(category); 
+					 
 					 	req.category = category;
 					 	next();
 					});	

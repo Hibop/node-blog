@@ -408,7 +408,6 @@ exports.postRegister = function (req, res, next) {
 
 // 注销
 exports.logout = function (req, res, next) {
-	res.render('admin/register', {
-		pretty: true
-	});
+	// req.logout();
+	// res.redirect('/');
 };
