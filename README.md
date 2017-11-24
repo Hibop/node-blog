@@ -36,21 +36,32 @@ npm start (前提本地先跑起MongoDB,配置见config.js)
 # 效果演示
 
 
+![这里写图片描述](http://img.blog.csdn.net/20171124233742729?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3pvbmdnZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20171124233754299?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3pvbmdnZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20171124233805520?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3pvbmdnZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20171124233816078?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3pvbmdnZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![这里写图片描述](http://img.blog.csdn.net/20171124233827014?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb3pvbmdnZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 # 功能
 
 前台
 
-- [x] 所有文章(首页)
+- [x] 所有文章(首页)含翻页, 搜索。
 - [x] 文章详情页面, 文章评论
 - [x] 文章分类, 分类下所有文章
-- [x] 登陆
+- [x] 登陆(前后台权限校验)
 - [x] 注册
 
 后台(访问地址http://localhost:3000/admin)
+登陆(http://localhost:3000/admin/users/login)
 
 - [x] 文章搜索, 删除, 查看, 编辑, 添加
 - [x] 分类删除, 查看, 编辑, 添加
-- [x] 修改密码
+- [x] 修改密码(未做)
 - [x] 注销
 
 
