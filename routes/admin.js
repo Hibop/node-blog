@@ -6,47 +6,48 @@ var editGetPost = require('../middlewares/editGetPost.js');
 var editGetCategory = require('../middlewares/editGetCategory.js');
 
 var passport = require('passport');
+var loginAuth = require('../middlewares/auth.js');
 
 // 后台管理首页
-router.get('/', adminController.showAdmin);
+router.get('/', loginAuth.auth, adminController.showAdmin);
 
 
 // 后台文章列表页
-router.get('/articles', adminController.showAdminArticles);
+router.get('/articles', loginAuth.auth, adminController.showAdminArticles);
 
 // 后台文章编辑查看
-router.get('/articles/edit/:id', editGetPost.getPost, adminController.viewAdminArticle);
+router.get('/articles/edit/:id', loginAuth.auth, editGetPost.getPost, adminController.viewAdminArticle);
 
 // 后台文章编辑提交
 
-router.post('/articles/edit/:id', editGetPost.getPost, adminController.editAdminArticle);
+router.post('/articles/edit/:id', loginAuth.auth, editGetPost.getPost, adminController.editAdminArticle);
 
 // 后台文章删除
-router.get('/articles/delete/:id', adminController.deleteArticle);
+router.get('/articles/delete/:id', loginAuth.auth, adminController.deleteArticle);
 
 // 后台文章列表添加
-router.get('/articles/add', adminController.addAdminArticle);
+router.get('/articles/add', loginAuth.auth, adminController.addAdminArticle);
 
-router.post('/articles/add', adminController.postAddAdminArticle);
+router.post('/articles/add', loginAuth.auth, adminController.postAddAdminArticle);
 
 // 后台分类列表
-router.get('/categories', adminController.showAdminCategories);
+router.get('/categories', loginAuth.auth, adminController.showAdminCategories);
 
 // 后台分类添加查看
-router.get('/categories/add', adminController.addAdminCategory);
+router.get('/categories/add', loginAuth.auth, adminController.addAdminCategory);
 
 // 后台分类添加提交
-router.post('/categories/add',  adminController.editAdminCategory);
+router.post('/categories/add',  loginAuth.auth, adminController.editAdminCategory);
 
 // 后台分类删除
-router.get('/categories/delete/:id', editGetCategory.getCategory, adminController.deleteAdminCategory);
+router.get('/categories/delete/:id', loginAuth.auth, editGetCategory.getCategory, adminController.deleteAdminCategory);
 
 // 后台分类编辑查看
-router.get('/categories/edit/:id', editGetCategory.getCategory, adminController.viewAdminCategory);
+router.get('/categories/edit/:id', loginAuth.auth, editGetCategory.getCategory, adminController.viewAdminCategory);
 
 
 // 后台分类编辑提交
-router.post('/categories/edit/:id', editGetCategory.getCategory, adminController.postAdminCategory);
+router.post('/categories/edit/:id', loginAuth.auth, editGetCategory.getCategory, adminController.postAdminCategory);
 
 // 登陆
 router.get('/users/login', adminController.login);
@@ -61,6 +62,6 @@ router.get('/users/register', adminController.register);
 router.post('/users/register', adminController.postRegister);
 
 // 注销
-router.get('/users/logout', adminController.logout);
+router.get('/users/logout', loginAuth.auth, adminController.logout);
 
 module.exports = router;

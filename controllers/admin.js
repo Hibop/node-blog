@@ -408,6 +408,8 @@ exports.postRegister = function (req, res, next) {
 
 // 注销
 exports.logout = function (req, res, next) {
-	// req.logout();
-	// res.redirect('/');
+	console.log("logging out");
+  console.log(res.user)
+	req.logout(); // passport
+	res.redirect('/');
 };
