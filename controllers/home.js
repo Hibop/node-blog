@@ -138,11 +138,18 @@ exports.doLike = function (req, res, next) {
 				 		if (err) {
 				 			return next(err);
 				 		};
-				 		article.meta.favorites = article.meta.favorites ? article.meta.favorites +1 : 1;
-				 		article.save(function (err) {
+				 		var newFa = article.meta.favorites + 1
+				 		// article.meta.favorites = article.meta.favorites ? article.meta.favorites +1 : 1;
+				 		article.meta.favorites = newFa || 1
+				 		console.log(newFa)
+				 		article.save(function (err, article) {
 				 			if (err) { return next(err)};
 				 			// TODO ajax点赞
-				 			res.redirect('/articles/view/' + article.slug);
+				 			console.log(article)
+				 			res.render('blog/view', {
+				 				title: article.title,
+				 				article: article
+				 			})
 				 		});
 				 		
 				 });
