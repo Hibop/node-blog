@@ -1,22 +1,7 @@
-//- 前后端通用的layout
 doctype html
 html
   head
     title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1')  
-    link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/stylesheets/flat-ui.min.css')
-    link(rel='stylesheet', href='/stylesheets/common.css')  
-    block styles
-    
-  body         
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
     block content
-
-    block scripts
-      script(type='text/javascript', src='/vendor/jquery-2.1.0.js')
-      script(type='text/javascript', src='/vendor/bootstrap/js/bootstrap.min.js')
-      script(type='text/javascript', src='/javascripts/queryString.js')
-      script(type='text/javascript', src='/javascripts/custom.js')  
-      
-  
